@@ -51,7 +51,12 @@ start() {
 
 stop() {
     echo "Stopping clash-meta..."
-    kill `pgrep -f $CLASH_META`
+    PIDS=$(pgrep -f "$CLASH_META")
+    if [ -z "$PIDS" ]; then
+        echo "No clash-meta process found."
+    else
+        kill $PIDS
+    fi
 }
 
 case "\$1" in
