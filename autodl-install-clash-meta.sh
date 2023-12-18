@@ -50,7 +50,7 @@ start() {
 
 stop() {
     echo "Stopping clash-meta..."
-    kill \$(pgrep -f \$CLASH_META)
+    kill `pgrep -f $CLASH_META`
 }
 
 case "\$1" in
