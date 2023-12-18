@@ -11,3 +11,7 @@
 3、一键安装git lfs：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/git-lfs-oneclick.sh | bash`
 
 4、rocky linux安装docker：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/rocky-linux-install-docker-engine.sh | bash`
+
+5、半自动脚本安装clash
+
+`curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh | bash -s -- 订阅链接url`
