@@ -28,7 +28,7 @@ git clone -b gh-pages https://github.com/kogekiplay/Yacd-meta ui
 wget "$SUBSCRIPTION_LINK" -O config.yaml
 
 # Create and write the init.d script
-cat << 'EOF' > /etc/init.d/clash-meta
+cat << EOF > /etc/init.d/clash-meta
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          clash-meta
@@ -71,6 +71,7 @@ esac
 
 exit 0
 EOF
+
 
 # Set execute permissions and register as a service
 chmod +x /etc/init.d/clash-meta
