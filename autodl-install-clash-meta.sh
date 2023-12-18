@@ -22,7 +22,7 @@ mv mihomo-linux-amd64-v1.17.0 clash-meta
 wget https://gh-hk.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/download/20231012/Country.mmdb
 
 # Clone the UI repository
-git clone -b gh-pages https://github.com/kogekiplay/Yacd-meta ui
+git clone -b gh-pages https://gh-hk.gujiakai.top/https://github.com/kogekiplay/Yacd-meta ui
 
 # Download clash subscription link using the provided argument
 wget "$SUBSCRIPTION_LINK" -O config.yaml
