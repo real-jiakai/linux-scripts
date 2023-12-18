@@ -18,6 +18,7 @@ mkdir -p clash && cd clash
 wget https://gh-hk.gujiakai.top/https://github.com/MetaCubeX/mihomo/releases/download/v1.17.0/mihomo-linux-amd64-v1.17.0.gz
 gunzip mihomo-linux-amd64-v1.17.0.gz
 mv mihomo-linux-amd64-v1.17.0 clash-meta
+chmod +x clash-meta
 
 wget https://gh-hk.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/download/20231012/Country.mmdb
 
