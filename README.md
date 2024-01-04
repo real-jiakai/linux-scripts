@@ -1,4 +1,4 @@
-# Itroduction
+# Introduction
 
 整理一些自用的linux一键脚本。
 
@@ -12,6 +12,10 @@
 
 4、rocky linux安装docker：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/rocky-linux-install-docker-engine.sh | bash`
 
-5、半自动脚本安装clash
+5、半自动脚本，在autodl上安装clash
 
 `curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh | bash -s -- 订阅链接url`
+
+6、国内vps半自动脚本安装clash-meta
+
+`curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
