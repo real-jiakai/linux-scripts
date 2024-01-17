@@ -7,10 +7,8 @@ check_docker() {
         echo "Docker could not be found. Installing..."
         install_docker
         echo "Docker is already installed."
-        run_projects
     else
         echo "Docker is already installed."
-        run_projects
     fi
 }
 
@@ -19,18 +17,99 @@ install_docker() {
     curl https://get.docker.com | bash
 }
 
-# Function to run traffmonetizer and repocket projects
-run_projects() {
-    # traffmonetizer project
-    docker pull traffmonetizer/cli_v2:latest
-    docker run -d --name tm traffmonetizer/cli_v2 start accept --token aIMhNjq+DjIPZdOYCZ/Jjrt2US1uD/uvQhQjEeom0Ig=
-
-    # repocket project
-    docker pull repocket/repocket:latest
-    echo "RP_EMAIL=gujiakai28@gmail.com" > rp.env
-    echo "RP_API_KEY=45b050b1-edba-4a77-b35b-ec1a88c5d9a3" >> rp.env
-    docker run --env-file rp.env -d --restart=always repocket/repocket
+# 检测系统使用的包管理器
+detect_package_manager() {
+    if command -v apt &> /dev/null; then
+        echo "apt"
+    elif command -v yum &> /dev/null; then
+        echo "yum"
+    else
+        echo "none"
+    fi
 }
 
-# Start the script by checking for Docker
+# 检查curl是否安装，如果没有安装，则安装它
+check_curl() {
+    if ! command -v curl &> /dev/null; then
+        echo "curl could not be found. Installing..."
+        package_manager=$(detect_package_manager)
+
+        case $package_manager in
+            apt)
+                sudo apt update
+                sudo apt install -y curl
+                ;;
+            yum)
+                sudo yum install -y curl
+                ;;
+            *)
+                echo "No supported package manager found. Cannot install curl."
+                return 1
+                ;;
+        esac
+    else
+        echo "curl is already installed."
+    fi
+}
+
+
+# 运行出售流量项目
+run_projects() {
+    # traffmonetizer 项目
+    if [ ! -d "$HOME/traffmonetizer" ]; then
+        echo "Creating directory for traffmonetizer..."
+        mkdir -p "$HOME/traffmonetizer"
+    else
+        echo "Directory for traffmonetizer already exists."
+    fi
+    cd "$HOME/traffmonetizer"
+    if [ ! -f compose.yml ]; then
+        echo "Downloading compose.yml for traffmonetizer..."
+        curl -fsSL https://raw.githubusercontent.com/real-jiakai/docker-compose/main/traffmonetizer/compose.yml -o compose.yml
+    else
+        echo "compose.yml for traffmonetizer already exists."
+    fi
+    if [ $(docker ps -a -f name=tm -q) ]; then
+        echo "Updating traffmonetizer project..."
+        docker compose pull
+        docker compose up -d
+    else
+        echo "Deploying traffmonetizer project..."
+        docker compose up -d
+    fi
+    echo "traffmonetizer project has been deployed or updated."
+
+    # repocket项目
+    if [ ! -d "$HOME/repocket" ]; then
+        echo "Creating directory for repocket..."
+        mkdir -p "$HOME/repocket"
+    else
+        echo "Directory for repocket already exists."
+    fi
+    cd "$HOME/repocket"
+    if [ ! -f compose.yml ] || [ ! -f rp.env ]; then
+        echo "Downloading compose.yml and rp.env for repocket..."
+        curl -fsSL https://raw.githubusercontent.com/real-jiakai/docker-compose/main/repocket/compose.yml -o compose.yml
+        curl -fsSL https://raw.githubusercontent.com/real-jiakai/docker-compose/main/repocket/rp.env -o rp.env
+    else
+        echo "compose.yml and rp.env for repocket already exist."
+    fi
+    if [ $(docker ps -a -f name=repocket -q) ]; then
+        echo "Updating repocket project..."
+        docker compose pull
+        docker compose up -d
+    else
+        echo "Deploying repocket project..."
+        docker compose up -d
+    fi
+    echo "repocket project has been deployed or updated."
+}
+
+# 检查docker安装情况
 check_docker
+
+# check_curl安装情况
+check_curl
+
+# 运行出售流量项目
+run_projects
