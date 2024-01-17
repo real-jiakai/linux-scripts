@@ -1,20 +1,22 @@
 #!/bin/bash
 
-# Function to check if Docker is installed
+# 检查docker是否安装，如果安装了，则输出信息，并运行项目
+# 如果没有安装则先安装docker，安装完毕后，再运行项目
 check_docker() {
     if ! command -v docker &> /dev/null; then
         echo "Docker could not be found. Installing..."
         install_docker
+        echo "Docker is already installed."
+        run_projects
     else
         echo "Docker is already installed."
         run_projects
     fi
 }
 
-# Function to install Docker
+# 安装docker函数
 install_docker() {
     curl https://get.docker.com | bash
-    run_projects
 }
 
 # Function to run traffmonetizer and repocket projects
