@@ -19,3 +19,7 @@
 6、国内vps半自动脚本安装clash-meta：
 
 `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
+
+7、debian系机器开机基本操作：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-startup.sh | bash`
+
+8、出售流量项目一键部署：`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh | bash`
