@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 检查订阅链接地址是否提供
-check_subscription_link() {
+check_subscription_url() {
     if [ -z "$1" ]; then
         echo "Error: No subscription link provided."
         echo "Usage: $0 <subscription_link_url>"
