@@ -6,6 +6,9 @@ check_subscription_link() {
         echo "Error: No subscription link provided."
         echo "Usage: $0 <subscription_link_url>"
         exit 1
+    elif [[ "$1" != http* ]]; then
+        echo "Error: Invalid subscription link. The link must start with 'http'."
+        exit 1
     fi
     SUBSCRIPTION_LINK="$1"
 }
