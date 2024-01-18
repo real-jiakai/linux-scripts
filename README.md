@@ -64,6 +64,47 @@ curl ipinfo.io/json
 
 `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
 
+执行完毕后，在`/opt/clash`目录下的config.json文件头部保证以下字段：
+
+```yaml
+allow-lan: true
+external-controller: :9090
+external-ui: /root/clash/ui
+secret: 你设置的ui界面的密码
+```
+
+接着重启clash-meta。
+
+```bash
+# 启动
+systemctl start clash-meta 
+# 重启clash-meta
+systemctl restart clash-meta
+# 暂停clash-meta
+systemctl stop clash-meta
+# 查看clash-meta状态
+systemctl status clash-meta
+```
+
+放行服务器的9090端口后，在浏览器的地址栏输入`http://服务器ip地址:9090/ui`，填写地址为`http://服务器ip地址:9090`，secret的值为一开始在config.yaml头部字段中的secret值。 
+进入yacd面板中，选择一个能用的代理节点。
+
+在服务器终端中输入以下内容来设置代理环境。
+
+```
+export http_proxy="http://localhost:7890"
+export https_proxy="http://localhost:7890"
+```
+
+在命令行中输入以下内容测试代理情况。
+
+```
+curl ipinfo.io/json
+```
+
+如果出现ip归属地为代理节点所在的国家或地区，则表明代理在linux终端生效。
+
+
 7、debian系机器开机基本操作：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-startup.sh | bash`
 
 8、出售流量项目一键部署：`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh | bash`
