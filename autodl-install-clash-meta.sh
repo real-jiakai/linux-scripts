@@ -49,7 +49,7 @@ install_clash_meta() {
 
 # 创建clash-meta系统服务
 create_and_register_clash_meta_service() {
-    cat << EOF > /etc/init.d/clash-meta
+    cat <<EOF > /etc/init.d/clash-meta
     #!/bin/sh
     ### BEGIN INIT INFO
     # Provides:          clash-meta
@@ -108,7 +108,7 @@ create_and_register_clash_meta_service() {
     esac
 
     exit 0
-    EOF
+EOF
 
     chmod +x /etc/init.d/clash-meta
     update-rc.d clash-meta defaults
