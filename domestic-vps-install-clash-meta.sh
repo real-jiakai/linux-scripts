@@ -10,7 +10,7 @@ check_subscription_url() {
         echo "Error: Invalid subscription link. The link must start with 'http'."
         exit 1
     fi
-    SUBSCRIPTION_LINK="$1"
+    SUBSCRIPTION_URL="$1"
 }
 
 # 设置clash-meta
