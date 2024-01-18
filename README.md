@@ -25,6 +25,13 @@ external-ui: /root/clash/ui
 secret: 你设置的ui界面的密码
 ```
 
+在autodl平台的jupyterlab的终端中启动clash-meta服务
+
+```bash
+# service clash-meta start/stop/restart/status
+service clash-meta start
+```
+
 在autodl平台的jupyterlab的终端中输入以下内容来设置代理环境。
 
 ```bash
@@ -42,7 +49,7 @@ export https_proxy="http://localhost:7890"
 ssh -L 9092:127.0.0.1:9090 root@region-9.autodl.pro -p 16030
 ```
 
-在浏览器地址中访问`http://127.0.0.1:9092/ui`，填写地址为`http://127.0.0.1:9090`，secret的值为一开始在config.yaml头部字段中的secret值。
+在浏览器地址中访问`http://127.0.0.1:9092/ui`，填写地址为`http://127.0.0.1:9092`，secret的值为一开始在config.yaml头部字段中的secret值。
 进入yacd面板中，选择一个能用的代理节点。
 
 回到autodl的jupyterlab终端处，在命令行中输入以下内容测试代理情况。
