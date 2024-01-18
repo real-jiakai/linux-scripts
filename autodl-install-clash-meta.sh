@@ -50,7 +50,7 @@ install_clash_meta() {
 # 创建clash-meta系统服务
 create_and_register_clash_meta_service() {
     # 创建并写入init.d脚本
-    cat << EOF > /etc/init.d/clash-meta
+    cat <<EOF > /etc/init.d/clash-meta
     #!/bin/sh
     ### BEGIN INIT INFO
     # Provides:          clash-meta
