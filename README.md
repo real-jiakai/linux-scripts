@@ -60,3 +60,12 @@ curl ipinfo.io/json
 7、debian系机器开机基本操作：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-startup.sh | bash`
 
 8、出售流量项目一键部署：`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh | bash`
+
+包含的四个出售流量项目分别为：
+
+- traffmonetizer
+- repocket
+- earnfm
+- packetstream
+
+如果需要使用，请将脚本中的对应参数更改为你的账户信息。
