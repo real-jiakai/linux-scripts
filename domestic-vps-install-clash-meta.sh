@@ -1,26 +1,39 @@
 #!/bin/bash
 
 # 检查订阅链接地址是否提供
-check_subscription_url() {
-    if [ "$#" -ne 1 ]; then
-        echo "用法: $0 <订阅链接>"
+check_subscription_link() {
+    if [ -z "$1" ]; then
+        echo "Error: No subscription link provided."
+        echo "Usage: $0 <subscription_link_url>"
+        exit 1
+    elif [[ "$1" != http* ]]; then
+        echo "Error: Invalid subscription link. The link must start with 'http'."
         exit 1
     fi
-    SUBSCRIPTION_URL=$1
+    SUBSCRIPTION_LINK="$1"
 }
 
 # 设置clash-meta
 setup_clash_meta() {
-    # Check if git and wget are installed, install them if they are not
-    if ! command -v git &> /dev/null; then
-        echo "Installing git..."
-        apt install git -y
+    # 检测包管理器并设置安装命令
+    if command -v apt &> /dev/null; then
+        PKG_MANAGER="apt"
+        PKG_INSTALL_CMD="apt install -y"
+    elif command -v yum &> /dev/null; then
+        PKG_MANAGER="yum"
+        PKG_INSTALL_CMD="yum install -y"
+    else
+        echo "Neither apt nor yum package manager found. Cannot install git and wget."
+        exit 1
     fi
 
-    if ! command -v wget &> /dev/null; then
-        echo "Installing wget..."
-        apt install wget -y
-    fi
+    # 安装 git 和 wget 如果它们未安装
+    for pkg in git wget; do
+        if ! command -v "$pkg" &> /dev/null; then
+            echo "Installing $pkg..."
+            $PKG_INSTALL_CMD "$pkg"
+        fi
+    done
     
     # 下载并安装 Clash Meta
     echo "开始安装 Clash Meta..."
