@@ -23,10 +23,9 @@ curl -L $XRAY_LATEST_RELEASE_URL -o $XRAY_ZIP
 echo "解压Xray..."
 unzip -o $XRAY_ZIP -d $TARGET_DIR
 
-# 重命名并移动文件
+# 重命名文件
 echo "更新文件..."
 mv -f ${TARGET_DIR}/xray ${TARGET_DIR}/xray-linux-amd64
-mv -f ${TARGET_DIR}/geoip.dat ${TARGET_DIR}/geosite.dat $TARGET_DIR
 
 # 清理ZIP文件
 rm $XRAY_ZIP
