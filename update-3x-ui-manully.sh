@@ -36,6 +36,7 @@ mv x-ui/ /usr/local/
 systemctl daemon-reload
 systemctl enable x-ui
 systemctl restart x-ui
+rm -rf x-ui-linux-amd64.tar.gz
 
 # 手动更新xray内核
 # 定义目标目录
