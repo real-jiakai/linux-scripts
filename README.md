@@ -117,3 +117,7 @@ curl ipinfo.io/json
 - packetstream
 
 如果需要使用，请将脚本中的对应参数更改为你的账户信息。
+
+9、国内机器更新3x-ui以及xray内核：
+
+`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/update-3x-ui-manully.sh | bash`
