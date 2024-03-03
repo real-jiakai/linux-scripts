@@ -12,7 +12,7 @@
 
 4、rocky linux安装docker：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/rocky-linux-install-docker-engine.sh | bash`
 
-5、半自动脚本，在autodl上安装clash-meta：
+5、半自动脚本，在autodl上安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】：
 
 `curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh | bash -s -- 你的订阅链接url`
 
@@ -60,7 +60,7 @@ curl ipinfo.io/json
 
 如果出现ip归属地为代理节点所在的国家或地区，则表明代理在autodl平台生效。
 
-6、国内vps半自动脚本安装clash-meta：
+6、国内vps半自动脚本安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】：
 
 `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
 
@@ -121,3 +121,7 @@ curl ipinfo.io/json
 9、国内机器更新3x-ui以及xray内核：
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/update-3x-ui-manully.sh | bash`
+
+10、vps一键安装watchtower：
+
+`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install-watchtower.sh | bash`
