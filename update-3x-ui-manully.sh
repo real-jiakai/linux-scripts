@@ -64,6 +64,6 @@ echo "更新文件..."
 mv -f ${TARGET_DIR}/xray ${TARGET_DIR}/xray-linux-amd64
 
 # 清理ZIP文件
-rm ${TARGET_DIR}/${XRAY_ZIP}
+rm $XRAY_ZIP
 
 echo "Xray-core更新完成。"
