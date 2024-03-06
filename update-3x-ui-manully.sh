@@ -44,7 +44,7 @@ TARGET_DIR="/usr/local/x-ui/bin"
 XRAY_ZIP="Xray-linux-64.zip"
 
 # 获取最新的Xray-core发布的ZIP文件URL
-XRAY_LATEST_RELEASE_URL=$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases/latest | grep browser_download_url | grep 'Xray-linux-64.zip' | cut -d '"' -f 4)
+XRAY_LATEST_RELEASE_URL=$(curl -s https://gh-api.gujiakai.top/repos/XTLS/Xray-core/releases/latest | grep browser_download_url | grep 'Xray-linux-64.zip' | cut -d '"' -f 4)
 
 if [ -z "$XRAY_LATEST_RELEASE_URL" ]; then
   echo "无法获取Xray最新版本的下载链接。"
