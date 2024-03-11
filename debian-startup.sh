@@ -10,3 +10,6 @@ echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 # 立即应用新的系统控制参数
 sysctl -p
 
+# 屏蔽25端口的输入和输出（针对SMTP服务）
+iptables -A INPUT -p tcp --dport 25 -j DROP
+iptables -A OUTPUT -p tcp --dport 25 -j DROP
