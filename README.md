@@ -126,6 +126,6 @@ curl ipinfo.io/json
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-fix-fail2ban.sh | bash`
 
-10、vps一键安装watchtower：
+11、vps一键安装watchtower：
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install-watchtower.sh | bash`
