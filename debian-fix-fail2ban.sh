@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# 确保安装了sudo
+if ! command -v sudo &> /dev/null; then
+    if [[ -e /etc/debian_version ]]; then
+        apt-get update
+        apt-get install sudo -y
+    elif [[ -e /etc/redhat-release ]]; then
+        yum update
+        yum install sudo -y
+    else
+        echo "不支持的 Linux 发行版"
+        exit 1
+    fi
+fi
+
 # 检查 fail2ban 是否安装
 if ! command -v fail2ban-client &> /dev/null; then
     echo "fail2ban 未安装，开始安装..."
@@ -8,11 +22,8 @@ if ! command -v fail2ban-client &> /dev/null; then
     if [[ -e /etc/debian_version ]]; then
         sudo apt-get update
         sudo apt-get install fail2ban -y
-    elif [[ -e /etc/redhat-release ]]; then
-        sudo yum update
-        sudo yum install fail2ban -y
     else
-        echo "不支持的 Linux 发行版"
+        echo "当前脚本仅支持 Debian 系列的 Linux 发行版"
         exit 1
     fi
 fi
