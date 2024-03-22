@@ -122,6 +122,10 @@ curl ipinfo.io/json
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/update-3x-ui-manully.sh | bash`
 
+10、使用fail2ban：
+
+`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-fix-fail2ban.sh | bash`
+
 10、vps一键安装watchtower：
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install-watchtower.sh | bash`
