@@ -127,30 +127,6 @@ run_projects() {
         docker compose up -d
     fi
     echo "earnfm project has been deployed or updated."
-
-    # packetstream项目
-    if [ ! -d "$HOME/packetstream" ]; then
-        echo "Creating directory for packetstream..."
-        mkdir -p "$HOME/packetstream"
-    else
-        echo "Directory for packetstream already exists."
-    fi
-    cd "$HOME/packetstream"
-    if [ ! -f compose.yml ]; then
-        echo "Downloading compose.yml for packetstream..."
-        curl -fsSL https://raw.githubusercontent.com/real-jiakai/docker-compose/main/packetstream/compose.yml -o compose.yml
-    else
-        echo "compose.yml for packetstream already exists."
-    fi
-    if [ $(docker ps -a -f name=psclient -q) ]; then
-        echo "Updating packetstream project..."
-        docker compose pull
-        docker compose up -d
-    else
-        echo "Deploying packetstream project..."
-        docker compose up -d
-    fi
-    echo "packetstream project has been deployed or updated."
 }
 
 # 检查docker安装情况
