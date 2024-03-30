@@ -126,10 +126,10 @@ curl ipinfo.io/json
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-fix-fail2ban.sh | bash`
 
-11、移除出售流量脚本中的packetstream支持。
-
-`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/remove-packetstream.sh | bash`
-
 11、vps一键安装watchtower：
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install-watchtower.sh | bash`
+
+12、移除出售流量脚本中的packetstream支持。
+
+`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/remove-packetstream.sh | bash`
