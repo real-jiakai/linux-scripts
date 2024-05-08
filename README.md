@@ -132,3 +132,7 @@ curl ipinfo.io/json
 12、移除出售流量脚本中的packetstream支持。
 
 `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/remove-packetstream.sh | bash`
+
+13、一键安装yt-dlp：
+
+`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install_yt_dlp.sh | sh`
