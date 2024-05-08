@@ -1,18 +1,33 @@
 # Introduction
 
-整理一些自用的linux一键脚本。
+整理一些自用的 Linux 一键脚本。
 
 # Usage
 
-1、创建1GB的swap交换分区：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/create_swap.sh | bash`
+以下是一些常用的 Linux 脚本及其说明：
 
-2、debian系的linux发行版安装caddy：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-install-caddy.sh | bash`
+| 功能描述                                         | 命令                                                                                                                   |
+|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| 创建 1GB 的 swap 交换分区                         | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/create_swap.sh \| bash`                    |
+| Debian 系的 Linux 发行版安装 Caddy               | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-install-caddy.sh \| bash`           |
+| 一键安装 Git LFS                                 | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/git-lfs-oneclick.sh \| bash`               |
+| Rocky Linux 安装 Docker                          | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/rocky-linux-install-docker-engine.sh \| bash` |
+| 在 autodl 上安装 clash-meta                      | `curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh \| bash -s -- 你的订阅链接url` |
+| 国内 VPS 半自动脚本安装 clash-meta               | `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh \| bash -s -- 订阅链接url` |
+| Debian 系机器开机基本操作                         | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-startup.sh \| bash`                |
+| 出售流量项目一键部署                              | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh \| bash`                     |
+| 国内机器更新 3x-ui 以及 xray 内核                 | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/update-3x-ui-manully.sh \| bash`                |
+| Debian 系列的发行版使用 fail2ban                  | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-fix-fail2ban.sh \| bash`                 |
+| VPS 一键安装 watchtower                          | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install-watchtower.sh \| bash`                   |
+| 移除出售流量脚本中的 packetstream 支持            | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/remove-packetstream.sh \| bash`                  |
+| xui 面板更新 geo 数据并将更新操作添加到定时任务   | `curl -O https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/xui-update-geodata.sh && chmod +x xui-update-geodata.sh && ./xui-update-geodata.sh` |
+| 一键安装 yt-dlp                                  | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install_yt_dlp.sh \| sh`                        |
 
-3、一键安装git lfs：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/git-lfs-oneclick.sh | bash`
+请根据自己的需求选择相应的脚本执行。
 
-4、rocky linux安装docker：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/rocky-linux-install-docker-engine.sh | bash`
+## Additional Information 
 
-5、半自动脚本，在autodl上安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】：
+1、半自动脚本，在autodl上安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】补充说明：
 
 `curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh | bash -s -- 你的订阅链接url`
 
@@ -60,7 +75,7 @@ curl ipinfo.io/json
 
 如果出现ip归属地为代理节点所在的国家或地区，则表明代理在autodl平台生效。
 
-6、国内vps半自动脚本安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】：
+2、国内vps半自动脚本安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】补充说明：
 
 `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
 
@@ -104,10 +119,7 @@ curl ipinfo.io/json
 
 如果出现ip归属地为代理节点所在的国家或地区，则表明代理在linux终端生效。
 
-
-7、debian系机器开机基本操作：`curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-startup.sh | bash`
-
-8、出售流量项目一键部署：`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh | bash`
+3、出售流量项目一键部署补充说明：`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh | bash`
 
 包含的三个出售流量项目分别为：
 
@@ -117,22 +129,3 @@ curl ipinfo.io/json
 
 如果需要使用，请将脚本中的对应参数更改为你的账户信息。
 
-9、国内机器更新3x-ui以及xray内核：
-
-`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/update-3x-ui-manully.sh | bash`
-
-10、debian系列的发行版使用fail2ban：
-
-`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-fix-fail2ban.sh | bash`
-
-11、vps一键安装watchtower：
-
-`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install-watchtower.sh | bash`
-
-12、移除出售流量脚本中的packetstream支持。
-
-`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/remove-packetstream.sh | bash`
-
-13、一键安装yt-dlp：
-
-`curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/install_yt_dlp.sh | sh`
