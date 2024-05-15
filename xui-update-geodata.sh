@@ -19,12 +19,18 @@ echo "1、V2Ray 官方 geoip.dat 和 geosite.dat"
 echo "2、L佬的V2Ray 路由规则文件加强版"
 read -p "输入选择 (1 或 2): " choice
 
+# 移除输入的所有空白字符
+choice=$(echo "$choice" | tr -d '[:space:]')
+
 # 设置下载目录
 DOWNLOAD_DIR="/usr/local/x-ui/bin"
 
 # 初始化变量
 GEOIP_URL=""
 GEOSITE_URL=""
+
+# 增加调试信息
+echo "你的选择是: '$choice'"
 
 case $choice in
     1)
@@ -43,7 +49,17 @@ esac
 
 # 下载文件
 wget -N --no-check-certificate -q -O "${DOWNLOAD_DIR}/geoip.dat" "$GEOIP_URL"
+if [[ $? -ne 0 ]]; then
+    echo "Failed to download geoip.dat"
+    exit 1
+fi
+
 wget -N --no-check-certificate -q -O "${DOWNLOAD_DIR}/geosite.dat" "$GEOSITE_URL"
+if [[ $? -ne 0 ]]; then
+    echo "Failed to download geosite.dat"
+    exit 1
+fi
+
 echo "geoip、geosite数据更新完成"
 
 # 定义crontab任务
