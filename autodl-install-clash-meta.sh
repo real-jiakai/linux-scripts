@@ -15,8 +15,11 @@ check_subscription_link() {
 
 # 安装clash-meta
 install_clash_meta() {
-    # Check if required tools are installed, install them if they are not
-    for tool in git wget jq; do
+    # 1. 优先更新软件包并安装 jq
+    apt update && apt install jq -y
+
+    # 2. 检查其他必需工具
+    for tool in git wget; do
         if ! command -v $tool &> /dev/null; then
             echo "Installing $tool..."
             apt install $tool -y
