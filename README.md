@@ -54,6 +54,8 @@ export http_proxy="http://localhost:7890"
 export https_proxy="http://localhost:7890"
 ```
 
+记得使用`source ~/.bashrc`来重载环境变量。
+
 接着在本机电脑的终端中输入类似以下的命令，进行端口转发。
 
 ```bash
