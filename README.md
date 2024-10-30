@@ -61,6 +61,7 @@ export https_proxy="http://localhost:7890"
 # -L 9092:127.0.0.1:9090: 将本地端口 9092 转发到远程服务器的 9090 端口
 # root@region-9.autodl.pro: SSH 登录的远程服务器地址
 # -p 16030: 使用 16030 端口进行 SSH 连接
+# 注意将16030更改你的autodl机器的SSH端口
 ssh -L 9092:127.0.0.1:9090 root@region-9.autodl.pro -p 16030
 ```
 
@@ -74,6 +75,26 @@ curl ipinfo.io/json
 ```
 
 如果出现ip归属地为代理节点所在的国家或地区，则表明代理在autodl平台生效。
+
+取消代理的话，可以使用如下命令。
+
+```bash
+unset http_proxy
+unset https_proxy
+```
+
+当然我更建议你将添加代理环境变量写入到`~/.bashrc`文件中。
+
+```
+vim ~/.bashrc
+# 在最底部添加如下代理环境变量
+export http_proxy="http://localhost:7890"
+export https_proxy="http://localhost:7890"
+```
+
+接着使用`source ~/.bashrc`来重载环境变量。
+
+不想用的时候，直接注释掉`～/.bashrc`文件中的代理环境变量，要用的时候再取消注释【记得做完操作重载环境变量】。
 
 2、国内vps半自动脚本安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】补充说明：
 
