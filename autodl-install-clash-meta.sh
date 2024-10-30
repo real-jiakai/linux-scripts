@@ -75,17 +75,17 @@ install_clash_meta() {
     chmod +x clash-meta
     print_success "Clash Meta binary prepared successfully"
     
-    # Download Country.mmdb (using mirror)
+    # 下载 Country.mmdb (using mirror)
     print_info "Downloading Country.mmdb..."
     wget https://gh.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb
     print_success "Country.mmdb downloaded successfully"
     
-    # Clone the UI repository (using mirror)
+    # 克隆 UI repository (using mirror)
     print_info "Cloning the UI repository..."
     git clone -b gh-pages https://gh.gujiakai.top/https://github.com/MetaCubeX/Yacd-meta ui
     print_success "UI repository cloned successfully"
     
-    # Download clash subscription link using the provided argument
+    # 下载clash订阅链接
     print_info "Downloading clash subscription configuration..."
     wget "$SUBSCRIPTION_LINK" -O config.yaml
     print_success "Configuration downloaded successfully"
