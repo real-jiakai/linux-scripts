@@ -83,19 +83,6 @@ unset http_proxy
 unset https_proxy
 ```
 
-当然我更建议你将添加代理环境变量写入到`~/.bashrc`文件中。
-
-```
-vim ~/.bashrc
-# 在最底部添加如下代理环境变量
-export http_proxy="http://localhost:7890"
-export https_proxy="http://localhost:7890"
-```
-
-接着使用`source ~/.bashrc`来重载环境变量。
-
-不想用的时候，直接注释掉`～/.bashrc`文件中的代理环境变量，要用的时候再取消注释【记得做完操作重载环境变量】。
-
 2、国内vps半自动脚本安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】补充说明：
 
 `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
