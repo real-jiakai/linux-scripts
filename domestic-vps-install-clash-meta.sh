@@ -37,7 +37,7 @@ setup_clash_meta() {
     
     # 下载并安装 Clash Meta
     echo "开始安装 Clash Meta..."
-    wget https://gh-hk.gujiakai.top/https://github.com/MetaCubeX/mihomo/releases/download/v1.18.0/mihomo-linux-amd64-v1.18.0.gz
+    wget https://gh.gujiakai.top/https://github.com/MetaCubeX/mihomo/releases/download/v1.18.0/mihomo-linux-amd64-v1.18.0.gz
     gunzip mihomo-linux-amd64-v1.18.0.gz
     mv mihomo-linux-amd64-v1.18.0 clash-meta
     mv clash-meta /usr/local/bin/
@@ -46,13 +46,13 @@ setup_clash_meta() {
     # 创建 Clash 目录并下载 Country.mmdb
     mkdir -p /opt/clash
     cd /opt/clash
-    wget https://gh-hk.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/download/20231012/Country.mmdb
+    wget https://gh.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/download/20231012/Country.mmdb
 
     # 下载配置文件
     curl -fsSL "$SUBSCRIPTION_URL" -o config.yaml
 
     # 克隆 Yacd-meta 面板
-    git clone -b gh-pages https://gh-hk.gujiakai.top/https://github.com/kogekiplay/Yacd-meta ui
+    git clone -b gh-pages https://gh.gujiakai.top/https://github.com/kogekiplay/Yacd-meta ui
 
     echo "Clash Meta 安装和配置完成。"
 }
