@@ -12,8 +12,8 @@
 | Debian 系的 Linux 发行版安装 Caddy               | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-install-caddy.sh \| bash`           |
 | 一键安装 Git LFS                                 | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/git-lfs-oneclick.sh \| bash`               |
 | Rocky Linux 安装 Docker                          | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/rocky-linux-install-docker-engine.sh \| bash` |
-| 在 autodl 上安装 clash-meta                      | `curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh \| bash -s -- 你的订阅链接url` |
-| 国内 VPS 半自动脚本安装 clash-meta               | `curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh \| bash -s -- 订阅链接url` |
+| 在 autodl 上安装 clash-meta                      | `curl -s https://gh.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh \| bash -s -- 你的订阅链接url` |
+| 国内 VPS 半自动脚本安装 clash-meta               | `curl https://gh.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh \| bash -s -- 订阅链接url` |
 | Debian 系机器开机基本操作                         | `curl -fsSL https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/debian-startup.sh \| bash`                |
 | 出售流量项目一键部署                              | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/sell-my-traffic.sh \| bash`                     |
 | 国内机器更新 3x-ui 以及 xray 内核                 | `curl https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/update-3x-ui-manully.sh \| bash`                |
@@ -29,7 +29,7 @@
 
 1、半自动脚本，在autodl上安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】补充说明：
 
-`curl -s https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh | bash -s -- 你的订阅链接url`
+`curl -s https://gh.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/autodl-install-clash-meta.sh | bash -s -- 你的订阅链接url`
 
 安装完毕后，在config.yaml的头部保证存在以下字段：
 
@@ -85,7 +85,7 @@ unset https_proxy
 
 2、国内vps半自动脚本安装clash-meta【注：国内服务器基本上可以用v2rayA项目来科学上网】补充说明：
 
-`curl https://gh-hk.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
+`curl https://gh.gujiakai.top/https://raw.githubusercontent.com/real-jiakai/linux-scripts/main/domestic-vps-install-clash-meta.sh | bash -s -- 订阅链接url`
 
 执行完毕后，在`/opt/clash`目录下的config.json文件头部保证以下字段：
 
