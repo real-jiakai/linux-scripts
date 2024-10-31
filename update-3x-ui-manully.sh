@@ -13,7 +13,7 @@ case "${ARCH}" in
 esac
 
 
-wget https://gh-hk.gujiakai.top/https://github.com/MHSanaei/3x-ui/releases/latest/download/x-ui-linux-${XUI_ARCH}.tar.gz
+wget https://gh.gujiakai.top/https://github.com/MHSanaei/3x-ui/releases/latest/download/x-ui-linux-${XUI_ARCH}.tar.gz
 
 ARCH=$(uname -m)
 case "${ARCH}" in
