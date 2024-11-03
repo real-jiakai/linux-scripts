@@ -42,7 +42,7 @@ install_clash_meta() {
     
     # 2. 检查其他必需工具
     print_info "Checking and installing required tools..."
-    for tool in git wget; do
+    for tool in git wget lsof; do
         if ! command -v $tool &> /dev/null; then
             print_info "Installing $tool..."
             apt install $tool -y
