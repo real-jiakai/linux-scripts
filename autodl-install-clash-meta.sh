@@ -51,7 +51,7 @@ install_clash_meta() {
     
     # 3. 创建clash目录并进入
     print_info "Creating and entering clash directory..."
-    mkdir -p clash && cd clash
+    mkdir -p ~/clash && cd ~/clash
     
     # Get the latest release information using the mirror API
     print_info "Fetching latest Clash Meta release information..."
