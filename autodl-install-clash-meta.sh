@@ -71,7 +71,7 @@ install_clash_meta() {
     gunzip clash-meta.gz
     
     # 5. 重命名并添加执行权限
-    mv "mihomo-linux-amd64-${VERSION}" clash-meta
+    # mv "mihomo-linux-amd64-${VERSION}" clash-meta
     chmod +x clash-meta
     print_success "Clash Meta binary prepared successfully"
     
