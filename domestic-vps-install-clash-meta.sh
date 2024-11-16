@@ -67,7 +67,7 @@ install_clash_meta() {
     
     # 3. 创建clash目录
     print_info "Creating clash directory..."
-    mkdir -p ～/clash && cd ～/clash
+    mkdir -p /root/clash && cd /root/clash
     
     # 4. 获取最新版本并下载
     print_info "Fetching latest Clash Meta release information..."
@@ -116,7 +116,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/local/bin/clash-meta -d ～/clash/
+ExecStart=/usr/local/bin/clash-meta -d /root/clash/
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=999999
