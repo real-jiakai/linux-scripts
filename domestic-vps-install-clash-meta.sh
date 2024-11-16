@@ -1,65 +1,113 @@
 #!/bin/bash
 
-# 检查订阅链接地址是否提供
-check_subscription_url() {
+# 彩色输出函数
+print_info() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
+
+print_success() {
+    echo -e "\033[1;32m[SUCCESS]\033[0m $1"
+}
+
+print_error() {
+    echo -e "\033[1;31m[ERROR]\033[0m $1"
+}
+
+print_section() {
+    echo -e "\n\033[1;33m=== $1 ===\033[0m"
+}
+
+# 检查订阅链接是否提供
+check_subscription_link() {
+    print_section "Checking Subscription Link"
     if [ -z "$1" ]; then
-        echo "Error: No subscription link provided."
+        print_error "No subscription link provided."
         echo "Usage: $0 <subscription_link_url>"
         exit 1
     elif [[ "$1" != http* ]]; then
-        echo "Error: Invalid subscription link. The link must start with 'http'."
+        print_error "Invalid subscription link. The link must start with 'http'."
         exit 1
     fi
-    SUBSCRIPTION_URL="$1"
+    SUBSCRIPTION_LINK="$1"
+    print_success "Subscription link validation passed"
 }
 
-# 设置clash-meta
-setup_clash_meta() {
-    # 检测包管理器并设置安装命令
+# 检测包管理器
+detect_package_manager() {
     if command -v apt &> /dev/null; then
         PKG_MANAGER="apt"
-        PKG_INSTALL_CMD="apt install -y"
+        UPDATE_CMD="apt update"
+        INSTALL_CMD="apt install -y"
     elif command -v yum &> /dev/null; then
         PKG_MANAGER="yum"
-        PKG_INSTALL_CMD="yum install -y"
+        UPDATE_CMD="yum update"
+        INSTALL_CMD="yum install -y"
     else
-        echo "Neither apt nor yum package manager found. Cannot install git and wget."
+        print_error "Neither apt nor yum package manager found. Cannot proceed with installation."
         exit 1
     fi
+}
 
-    # 安装 git 和 wget 如果它们未安装
-    for pkg in git wget; do
-        if ! command -v "$pkg" &> /dev/null; then
-            echo "Installing $pkg..."
-            $PKG_INSTALL_CMD "$pkg"
+# 安装clash-meta
+install_clash_meta() {
+    print_section "Installing Clash Meta"
+    
+    # 1. 优先更新软件包并安装 jq
+    print_info "Updating package list and installing jq..."
+    $UPDATE_CMD && $INSTALL_CMD jq
+    
+    # 2. 检查其他必需工具
+    print_info "Checking and installing required tools..."
+    for tool in git wget curl lsof; do
+        if ! command -v $tool &> /dev/null; then
+            print_info "Installing $tool..."
+            $INSTALL_CMD $tool
         fi
     done
     
-    # 下载并安装 Clash Meta
-    echo "开始安装 Clash Meta..."
-    wget https://gh.gujiakai.top/https://github.com/MetaCubeX/mihomo/releases/download/v1.18.0/mihomo-linux-amd64-v1.18.0.gz
-    gunzip mihomo-linux-amd64-v1.18.0.gz
-    mv mihomo-linux-amd64-v1.18.0 clash-meta
+    # 3. 创建clash目录
+    print_info "Creating clash directory..."
+    mkdir -p ～/clash && cd ～/clash
+    
+    # 4. 获取最新版本并下载
+    print_info "Fetching latest Clash Meta release information..."
+    VERSION=$(wget -qO- https://gh-api.gujiakai.top/repos/MetaCubeX/mihomo/releases/latest | jq -r .tag_name)
+    print_success "Latest version: $VERSION"
+    
+    DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/${VERSION}/mihomo-linux-amd64-${VERSION}.gz"
+    
+    print_info "Downloading Clash Meta binary..."
+    wget "https://gh.gujiakai.top/${DOWNLOAD_URL}" -O clash-meta.gz
+    
+    print_info "Extracting and installing Clash Meta binary..."
+    gunzip clash-meta.gz
+    chmod +x clash-meta
     mv clash-meta /usr/local/bin/
-    chmod +x /usr/local/bin/clash-meta
-
-    # 创建 Clash 目录并下载 Country.mmdb
-    mkdir -p /opt/clash
-    cd /opt/clash
-    wget https://gh.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/download/20231012/Country.mmdb
-
-    # 下载配置文件
-    curl -fsSL "$SUBSCRIPTION_URL" -o config.yaml
-
-    # 克隆 Yacd-meta 面板
-    git clone -b gh-pages https://gh.gujiakai.top/https://github.com/kogekiplay/Yacd-meta ui
-
-    echo "Clash Meta 安装和配置完成。"
+    print_success "Clash Meta binary installed successfully"
+    
+    # 5. 下载 Country.mmdb
+    print_info "Downloading Country.mmdb..."
+    wget https://gh.gujiakai.top/https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb
+    print_success "Country.mmdb downloaded successfully"
+    
+    # 6. 克隆 UI repository
+    print_info "Cloning the UI repository..."
+    git clone -b gh-pages https://gh.gujiakai.top/https://github.com/MetaCubeX/Yacd-meta ui
+    print_success "UI repository cloned successfully"
+    
+    # 7. 下载clash订阅配置
+    print_info "Downloading clash subscription configuration..."
+    wget "$SUBSCRIPTION_LINK" -O config.yaml
+    print_success "Configuration downloaded successfully"
+    
+    print_success "Clash Meta installation completed successfully"
 }
 
-# 设置clash-meta系统服务
-setup_and_start_clash_meta_service() {
-    # 创建并配置 clash-meta.service 文件
+# 创建systemd服务
+create_and_register_systemd_service() {
+    print_section "Creating Systemd Service"
+    
+    print_info "Creating systemd service file..."
     cat <<EOF > /etc/systemd/system/clash-meta.service
 [Unit]
 Description=Clash Meta daemon, A rule-based proxy in Go.
@@ -68,31 +116,42 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/local/bin/clash-meta -d /opt/clash/
+ExecStart=/usr/local/bin/clash-meta -d ～/clash/
 Restart=on-failure
+RestartSec=3
+LimitNOFILE=999999
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-    # 重载 systemd 配置并启动 Clash Meta 服务
+    print_info "Enabling and starting clash-meta service..."
     systemctl daemon-reload
-    systemctl enable --now clash-meta
-
-    echo "Clash-meta service has been set up and started."
+    systemctl enable clash-meta
+    systemctl start clash-meta
+    
+    print_success "Clash-meta service has been created, enabled and started"
 }
 
-# 检查订阅链接
-check_subscription_url "$1"
+# 主流程
+print_section "Starting Clash Meta Installation"
 
-# 安装和设置 Clash Meta
-setup_clash_meta
+# 检查传递的订阅链接
+check_subscription_link "$1"
 
-# 设置并启动 Clash Meta 系统服务
-setup_and_start_clash_meta_service
+# 检测包管理器
+detect_package_manager
+
+# 安装clash-meta
+install_clash_meta
+
+# 创建并注册systemd服务
+create_and_register_systemd_service
 
 # 返回到用户的家目录
 cd ~
 
-# 输出完成信息
-echo "Clash Meta 安装和服务配置完成。"
+print_section "Installation Complete"
+print_success "Clash Meta has been successfully installed and configured"
+print_info "You can manage the service using: systemctl {start|stop|restart|status} clash-meta"
+print_info "Web UI is available at: http://your-server-ip:9090/ui"
