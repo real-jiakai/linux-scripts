@@ -116,6 +116,18 @@ CLASH_DIR="/root/clash/"
 start() {
     echo "Starting clash-meta..."
     nohup \$CLASH_META -d \$CLASH_DIR > /dev/null 2>&1 &
+    
+    # 等待一秒让进程启动
+    sleep 1
+    
+    # 检查进程是否成功启动
+    if pgrep -f "clash-meta -d" > /dev/null; then
+        echo "clash-meta started successfully (PID: $(pgrep -f 'clash-meta -d'))"
+        return 0
+    else
+        echo "Failed to start clash-meta"
+        return 1
+    fi
 }
 
 stop() {
