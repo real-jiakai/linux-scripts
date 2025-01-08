@@ -98,7 +98,7 @@ create_and_register_clash_meta_service() {
     print_section "Creating System Service"
     
     print_info "Creating service file..."
-    cat <<EOF > /etc/init.d/clash-meta
+    cat <<'EOF' > /etc/init.d/clash-meta
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          clash-meta
@@ -113,21 +113,18 @@ create_and_register_clash_meta_service() {
 CLASH_META="/root/clash/clash-meta"
 CLASH_DIR="/root/clash/"
 
-get_pid() {
-    lsof -t -i:7890
-}
-
 start() {
     echo "Starting clash-meta..."
-    if [ -n "$(get_pid)" ]; then
-        echo "clash-meta is already running on port 7890"
+    PID=$(lsof -t -i:7890 2>/dev/null)
+    if [ -n "$PID" ]; then
+        echo "clash-meta is already running on port 7890 (PID: $PID)"
         return 1
     fi
     
     nohup \$CLASH_META -d \$CLASH_DIR > /dev/null 2>&1 &
     sleep 2
     
-    PID=$(get_pid)
+    PID=$(lsof -t -i:7890 2>/dev/null)
     if [ -n "$PID" ]; then
         echo "clash-meta started successfully (PID: $PID)"
         return 0
@@ -139,19 +136,20 @@ start() {
 
 stop() {
     echo "Stopping clash-meta..."
-    PID=$(get_pid)
+    PID=$(lsof -t -i:7890 2>/dev/null)
     if [ -z "$PID" ]; then
         echo "No clash-meta process found on port 7890"
         return 0
     else
         echo "Killing clash-meta (PID: $PID)"
         kill -9 $PID
+        sleep 1
         echo "clash-meta stopped successfully"
     fi
 }
 
 status() {
-    PID=$(get_pid)
+    PID=$(lsof -t -i:7890 2>/dev/null)
     if [ -z "$PID" ]; then
         echo "clash-meta is not running on port 7890"
         return 1
