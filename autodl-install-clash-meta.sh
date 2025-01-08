@@ -115,13 +115,14 @@ CLASH_DIR="/root/clash/"
 
 start() {
     echo "Starting clash-meta..."
-    nohup $CLASH_META -d $CLASH_DIR > /root/clash/clash-meta.log 2>&1 &
+    cd $CLASH_DIR
+    nohup "$CLASH_META" -d "$CLASH_DIR" > clash-meta.log 2>&1 &
     sleep 1
     if pgrep -f "clash-meta -d" > /dev/null; then
         echo "clash-meta started successfully."
         return 0
     else
-        echo "Failed to start clash-meta. Check logs at /root/clash/clash-meta.log"
+        echo "Failed to start clash-meta. Check logs at $CLASH_DIR/clash-meta.log"
         return 1
     fi
 }
