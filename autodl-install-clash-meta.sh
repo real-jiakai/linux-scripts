@@ -115,25 +115,51 @@ CLASH_DIR="/root/clash/"
 
 start() {
     echo "Starting clash-meta..."
-    nohup \$CLASH_META -d \$CLASH_DIR > /dev/null 2>&1 &
+    nohup $CLASH_META -d $CLASH_DIR > /root/clash/clash-meta.log 2>&1 &
+    sleep 1
+    if pgrep -f "clash-meta -d" > /dev/null; then
+        echo "clash-meta started successfully."
+        return 0
+    else
+        echo "Failed to start clash-meta. Check logs at /root/clash/clash-meta.log"
+        return 1
+    fi
 }
 
 stop() {
     echo "Stopping clash-meta..."
-    PIDS=\$(pidof -x clash-meta)
-    if [ -z "\$PIDS" ]; then
+    # 使用 pgrep 查找进程
+    PIDS=$(pgrep -f "clash-meta -d")
+    if [ -z "$PIDS" ]; then
         echo "No clash-meta process found."
+        return 0
     else
-        kill \$PIDS
+        # 首先尝试正常终止
+        kill $PIDS
+        # 等待最多 5 秒
+        for i in {1..5}; do
+            if ! pgrep -f "clash-meta -d" > /dev/null; then
+                echo "clash-meta stopped successfully."
+                return 0
+            fi
+            sleep 1
+        done
+        # 如果进程仍然存在，强制终止
+        if pgrep -f "clash-meta -d" > /dev/null; then
+            echo "Force stopping clash-meta..."
+            kill -9 $(pgrep -f "clash-meta -d")
+        fi
     fi
 }
 
 status() {
-    PIDS=\$(pidof -x clash-meta)
-    if [ -z "\$PIDS" ]; then
+    PIDS=$(pgrep -f "clash-meta -d")
+    if [ -z "$PIDS" ]; then
         echo "clash-meta is not running."
+        return 1
     else
-        echo "clash-meta is running. PIDs: \$PIDS"
+        echo "clash-meta is running. PIDs: $PIDS"
+        return 0
     fi
 }
 
