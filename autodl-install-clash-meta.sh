@@ -115,7 +115,7 @@ CLASH_DIR="/root/clash/"
 
 start() {
     echo "Starting clash-meta..."
-    nohup \$CLASH_META -d \$CLASH_DIR > /dev/null 2>&1 &
+    nohup $CLASH_META -d $CLASH_DIR > /dev/null 2>&1 &
     
     # 等待一秒让进程启动
     sleep 1
