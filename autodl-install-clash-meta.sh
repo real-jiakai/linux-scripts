@@ -113,16 +113,23 @@ create_and_register_clash_meta_service() {
 CLASH_META="/root/clash/clash-meta"
 CLASH_DIR="/root/clash/"
 
+get_pid() {
+    lsof -t -i:7890
+}
+
 start() {
     echo "Starting clash-meta..."
+    if [ -n "$(get_pid)" ]; then
+        echo "clash-meta is already running on port 7890"
+        return 1
+    fi
+    
     nohup \$CLASH_META -d \$CLASH_DIR > /dev/null 2>&1 &
+    sleep 2
     
-    # 等待一秒让进程启动
-    sleep 1
-    
-    # 检查进程是否成功启动
-    if pidof -x clash-meta > /dev/null; then
-        echo "clash-meta started successfully (PID: $(pidof -x clash-meta))"
+    PID=$(get_pid)
+    if [ -n "$PID" ]; then
+        echo "clash-meta started successfully (PID: $PID)"
         return 0
     else
         echo "Failed to start clash-meta"
@@ -132,28 +139,24 @@ start() {
 
 stop() {
     echo "Stopping clash-meta..."
-    PIDS=\$(pidof -x clash-meta)
-    if [ -z "\$PIDS" ]; then
-        echo "No clash-meta process found."
+    PID=$(get_pid)
+    if [ -z "$PID" ]; then
+        echo "No clash-meta process found on port 7890"
         return 0
     else
-        kill \$PIDS
-        sleep 1
-        if pidof -x clash-meta > /dev/null; then
-            echo "Force stopping clash-meta..."
-            kill -9 \$(pidof -x clash-meta)
-        fi
-        echo "clash-meta stopped successfully."
+        echo "Killing clash-meta (PID: $PID)"
+        kill -9 $PID
+        echo "clash-meta stopped successfully"
     fi
 }
 
 status() {
-    PIDS=\$(pidof -x clash-meta)
-    if [ -z "\$PIDS" ]; then
-        echo "clash-meta is not running."
+    PID=$(get_pid)
+    if [ -z "$PID" ]; then
+        echo "clash-meta is not running on port 7890"
         return 1
     else
-        echo "clash-meta is running. PIDs: \$PIDS"
+        echo "clash-meta is running (PID: $PID)"
         return 0
     fi
 }
@@ -167,6 +170,7 @@ case "\$1" in
         ;;
     restart)
         stop
+        sleep 1
         start
         ;;
     status)
